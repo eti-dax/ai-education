@@ -1,0 +1,42 @@
+name: Claude PR Review - Missing Tests
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Review this pull request for exactly one concern: missing test coverage.
+
+            Look at the diff. For every new or changed public method or unit of logic,
+            check whether the PR also adds or updates a test that exercises it.
+
+            Post your findings as a single PR comment using `gh pr comment`:
+            - If you find methods or logic changes without a corresponding test, list
+              each one with its file and a short description of what's untested.
+            - If every change in this PR is covered by a test, post a one-line comment
+              saying no missing-test issues were found.
+
+            Do not comment on anything other than missing test coverage.
+          claude_args: |
+            --max-turns 10
+            --allowedTools "Bash(gh pr comment:*)"
