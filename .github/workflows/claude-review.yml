@@ -47,4 +47,4 @@ jobs:
             Do not comment on anything other than missing test coverage.
           claude_args: |
             --max-turns 10
-            --allowedTools "Bash(git diff:*),Bash(git log:*),Bash(gh pr diff:*),Bash(gh pr comment:*)"
+            --allowedTools "Bash(git diff:*),Bash(git log:*),Bash(gh:*)"
