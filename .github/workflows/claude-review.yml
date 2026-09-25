@@ -21,7 +21,6 @@ jobs:
       - uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          show_full_output: true
           prompt: |
             REPO: ${{ github.repository }}
             PR NUMBER: ${{ github.event.pull_request.number }}
@@ -32,7 +31,11 @@ jobs:
             For every new or changed public method or unit of logic, check whether the
             diff also adds or updates a test that exercises it.
 
-            Post your findings as a single PR comment using `gh pr comment`:
+            Post your findings as a single PR comment using `gh pr comment <number> --body "..."`.
+            Pass the body as one plain double-quoted string, with real newlines typed
+            directly inside the quotes if it spans multiple lines. Do not use command
+            substitution, heredocs, or `$(...)` to build the body — a command containing
+            those is held for manual approval and the run will end without posting.
             - If you find methods or logic changes without a corresponding test, list
               each one with its file and a short description of what's untested.
             - If every change in this PR is covered by a test, post a one-line comment
