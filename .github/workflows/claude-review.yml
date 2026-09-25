@@ -27,8 +27,9 @@ jobs:
 
             Review this pull request for exactly one concern: missing test coverage.
 
-            Look at the diff. For every new or changed public method or unit of logic,
-            check whether the PR also adds or updates a test that exercises it.
+            Run `git diff origin/main...HEAD` to see exactly what changed in this PR.
+            For every new or changed public method or unit of logic, check whether the
+            diff also adds or updates a test that exercises it.
 
             Post your findings as a single PR comment using `gh pr comment`:
             - If you find methods or logic changes without a corresponding test, list
@@ -39,4 +40,4 @@ jobs:
             Do not comment on anything other than missing test coverage.
           claude_args: |
             --max-turns 10
-            --allowedTools "Bash(gh pr comment:*)"
+            --allowedTools "Bash(git diff:*),Bash(git log:*),Bash(gh pr diff:*),Bash(gh pr comment:*)"
