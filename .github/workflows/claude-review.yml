@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  issues: write
   pull-requests: write
   id-token: write
 
@@ -47,4 +48,4 @@ jobs:
             Do not comment on anything other than missing test coverage.
           claude_args: |
             --max-turns 10
-            --allowedTools "Bash(git diff:*),Bash(git log:*),Bash(gh:*)"
+            --allowedTools "Bash(git diff:*),Bash(git log:*),Bash(gh pr comment:*)"
