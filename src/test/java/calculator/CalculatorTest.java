@@ -22,4 +22,9 @@ class CalculatorTest {
     void multipliesTwoNumbers() {
         assertEquals(6, calculator.multiply(2, 3));
     }
+
+    @Test
+    void dividesTwoNumbers() {
+        assertEquals(2, calculator.divide(6, 3));
+    }
 }
