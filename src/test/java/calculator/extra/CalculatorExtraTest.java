@@ -67,4 +67,9 @@ class CalculatorExtraTest {
         assertThrows(ArithmeticException.class, () -> calculator.modulo(a, b));
         System.out.println("OK");
     }
+
+    @Test
+    void testSubtractsLargeNumbers() {
+        assertEquals(3000, calculator.subtract(5000, 2000));
+    }
 }
